@@ -2,11 +2,14 @@ import java.util.ArrayList;
 
 class Jogador {
     private String nome;
-    public int numeroDeTropas;
+    private int numeroDeTropas;
+    private int vitorias;
     private ArrayList<Unidade> unidades;
 
-    public Jogador(String nome, int numeroDeTropas) {
+
+    public Jogador(String nome, int numeroDeTropas, int vitorias) {
         this.nome = nome;
+        this.vitorias = vitorias;
         this.numeroDeTropas = numeroDeTropas;
         this.unidades = new ArrayList<>();
     }
@@ -82,6 +85,30 @@ class Jogador {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getNumeroDeTropas() {
+        return numeroDeTropas;
+    }
+
+    public int getVitorias() {
+        return vitorias;
+    }
+
+    public void incrementarVitorias() {
+        vitorias++;
+    }
+
+    public ArrayList<Unidade> getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(ArrayList<Unidade> unidades) {
+        this.unidades = unidades;
+    }
+
+    public void setNumeroDeTropas(int numeroDeTropas) {
+        this.numeroDeTropas = numeroDeTropas;
     }
 
     @Override

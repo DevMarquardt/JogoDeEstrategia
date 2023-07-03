@@ -4,8 +4,8 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Jogador jogador1 = new Jogador("", 0);
-        Jogador jogador2 = new Jogador("", 0);
+        Jogador jogador1 = new Jogador("", 0, 0);
+        Jogador jogador2 = new Jogador("", 0, 0);
         menuInicial(jogador1, jogador2);
     }
 
@@ -14,7 +14,8 @@ public class Main {
         System.out.println("<============================>");
         System.out.println("         1 - Jogar          ");
         System.out.println("         2 - Sair           ");
-        System.out.println("<============================>\n>");
+        System.out.println("<============================>");
+        System.out.println(">");
         opcaoMenuInicial = sc.nextInt();
         switch (opcaoMenuInicial){
             case 1:
@@ -33,6 +34,7 @@ public class Main {
         String jogador1Nome, jogador2Nome;
 
         do {
+            System.out.println("\n\n\n\n\n\n\n\n\n");
             System.out.println("<============================>");
             System.out.println("Qual o apelido do jogador 1?\n>");
             jogador1Nome = sc.next();
@@ -42,15 +44,14 @@ public class Main {
             jogador2.setNome(jogador2Nome);
             System.out.println("<============================> ");
         } while (jogador1.getNome().equals("") || jogador2.getNome().equals(""));
-
-
-
         menuTropas(jogador1, jogador2);
     }
 
     private static void menuTropas(Jogador jogador1, Jogador jogador2) {
         int tropaEscolhida;
 
+        System.out.println("O jogador " + jogador1.getNome() + " possui " + jogador1.getVitorias() + " vitórias");
+        System.out.println("O jogador " + jogador2.getNome() + " possui " + jogador2.getVitorias() + " vitórias");
         do {
             System.out.println("<============= " + jogador1.getNome() + " =============>");
             System.out.println("Digite o número da tropa desejada");
@@ -64,9 +65,10 @@ public class Main {
             tropaEscolhida = sc.nextInt();
             jogador1.escolherTropaJogador1(tropaEscolhida);
 
-        } while (jogador1.numeroDeTropas<=2);
+        } while (jogador1.getNumeroDeTropas()<=2);
 
         do {
+
             System.out.println("<============= " + jogador2.getNome() + " =============>");
             System.out.println("Digite o número da tropa desejada");
             System.out.println("          1 - Arqueira");
@@ -79,15 +81,17 @@ public class Main {
             tropaEscolhida = sc.nextInt();
             jogador2.escolherTropaJogador2(tropaEscolhida);
 
-        } while (jogador2.numeroDeTropas<=2);
+        } while (jogador2.getNumeroDeTropas()<=2);
 
-        menuInGame(jogador1, jogador2);
+        menuInGameJogador1(jogador1, jogador2);
     }
 
-    public static void menuInGame(Jogador jogador1, Jogador jogador2) {
+    public static void menuInGameJogador1(Jogador jogador1, Jogador jogador2) {
         boolean jogoRodando = true;
+        Jogador jogadorJogando;
         int opcaoMenuInGame;
         do {
+
             System.out.println("<===============================>");
             System.out.println(jogador1.toString());
             System.out.println("|                               |");
@@ -98,18 +102,41 @@ public class Main {
             System.out.println("Turno do(a) " + jogador1.getNome());
             System.out.println("Selecione a opção desejada");
             System.out.println("1 - Selecionar tropa");
-            System.out.println("2 - Propor acordo");
-            System.out.println("3 - Aceitar a morte\n>");
+            System.out.println("2 - Aceitar a morte\n>");
             opcaoMenuInGame = sc.nextInt();
+            jogadorJogando = jogador2;
             switch (opcaoMenuInGame){
                 case 1:
-                    menuSelecionarTropa();
+                    menuSelecionarTropa(jogador1, jogador2, jogadorJogando);
                     break;
                 case 2:
-                    proporEmpate();
+                    desistir(jogador1, jogador2, jogadorJogando);
                     break;
-                case 3:
-                    desistir();
+                default:
+                    System.out.println("Selecione uma opção valida");
+            }
+        } while (jogoRodando);
+
+        do {
+            System.out.println("<===============================>");
+            System.out.println(jogador1.toString());
+            System.out.println("|                               |");
+            System.out.println("|               VS              |");
+            System.out.println("|                               |");
+            System.out.println(jogador2.toString());
+            System.out.println("<===============================>");
+            System.out.println("Turno do(a) " + jogador2.getNome());
+            System.out.println("Selecione a opção desejada");
+            System.out.println("1 - Selecionar tropa");
+            System.out.println("2 - Aceitar a morte\n>");
+            opcaoMenuInGame = sc.nextInt();
+            jogadorJogando = jogador2;
+            switch (opcaoMenuInGame){
+                case 1:
+                    menuSelecionarTropa(jogador1, jogador2, jogadorJogando);
+                    break;
+                case 2:
+                    desistir(jogador1, jogador2, jogadorJogando);
                     break;
                 default:
                     System.out.println("Selecione uma opção valida");
@@ -117,13 +144,27 @@ public class Main {
         } while (jogoRodando);
     }
 
-    private static void menuSelecionarTropa() {
+    private static void menuSelecionarTropa(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+        System.out.println(jogador1.getUnidades());
+
+
     }
 
-    private static void proporEmpate() {
-    }
+    private static void desistir(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+        System.out.println("Fim de jogo");
+        if(jogadorJogando.equals(jogador1)){
+            System.out.println("O jogador " + jogador1.getNome() + " desistiu da partida, vitória para o jogador " + jogador2.getNome());
+            jogador2.incrementarVitorias();
+        }else if(jogadorJogando.equals(jogador2)){
+            System.out.println("O jogador " + jogador2.getNome() + " desistiu da partida, vitória para o jogador " + jogador1.getNome());
+            jogador1.incrementarVitorias();
+        }
+        jogador1.getUnidades().clear();
+        jogador2.getUnidades().clear();
+        jogador1.setNumeroDeTropas(0);
+        jogador2.setNumeroDeTropas(0);
 
-    private static void desistir() {
+        menuTropas(jogador1, jogador2);
 
     }
 }
