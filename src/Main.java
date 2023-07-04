@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -145,8 +146,32 @@ public class Main {
     }
 
     private static void menuSelecionarTropa(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
-        System.out.println(jogador1.getUnidades());
+        System.out.println("Tropas disponíveis:");
+        ArrayList<Unidade> tropasDisponiveis = jogadorJogando.getUnidades();
 
+        for (int i = 0; i < tropasDisponiveis.size(); i++) {
+            Unidade tropa = tropasDisponiveis.get(i);
+            System.out.println((i + 1) + " - " + tropa.toString());
+        }
+
+        System.out.println("Selecione o número correspondente à tropa desejada:");
+        int tropaSelecionada = sc.nextInt();
+
+        if (tropaSelecionada < 1 || tropaSelecionada > tropasDisponiveis.size()) {
+            System.out.println("Opção inválida, escolha novamente.");
+            menuSelecionarTropa(jogador1, jogador2, jogadorJogando);
+            return;
+        }
+
+        Unidade tropa = tropasDisponiveis.get(tropaSelecionada - 1);
+        System.out.println("Você selecionou: " + tropa.toString());
+
+        System.out.println("Escolha a direção para mover a tropa:");
+        System.out.println("1 - Cima");
+        System.out.println("2 - Baixo");
+        System.out.println("3 - Esquerda");
+        System.out.println("4 - Direita");
+        int direcao = sc.nextInt();
 
     }
 
