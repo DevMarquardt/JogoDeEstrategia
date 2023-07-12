@@ -8,4 +8,13 @@ class Mosqueteira extends Unidade {
     public String toString() {
         return "Mosqueteira";
     }
+
+    @Override
+    void Atacar() {
+    }
+
+    @Override
+    void Defender() {
+
+    }
 }

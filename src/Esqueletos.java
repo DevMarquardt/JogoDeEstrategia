@@ -8,4 +8,14 @@ class Esqueletos extends Unidade {
     public String toString() {
         return "Esqueletos";
     }
+
+    @Override
+    void Atacar() {
+
+    }
+
+    @Override
+    void Defender() {
+
+    }
 }

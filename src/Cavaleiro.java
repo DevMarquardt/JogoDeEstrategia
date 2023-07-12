@@ -8,4 +8,14 @@ class Cavaleiro extends Unidade {
     public String toString() {
         return "Cavaleiro";
     }
+
+    @Override
+    void Atacar() {
+
+    }
+
+    @Override
+    void Defender() {
+
+    }
 }

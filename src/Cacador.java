@@ -8,4 +8,14 @@ class Cacador extends Unidade {
     public String toString() {
         return "Caçador";
     }
+
+    @Override
+    void Atacar() {
+
+    }
+
+    @Override
+    void Defender() {
+
+    }
 }

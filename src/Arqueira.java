@@ -8,4 +8,14 @@ class Arqueira extends Unidade {
     public String toString() {
         return "Arqueira";
     }
+
+    @Override
+    void Atacar() {
+
+    }
+
+    @Override
+    void Defender() {
+
+    }
 }

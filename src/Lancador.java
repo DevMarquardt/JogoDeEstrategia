@@ -8,4 +8,14 @@ class Lancador extends Unidade {
     public String toString() {
         return "Lancador";
     }
+
+    @Override
+    void Atacar() {
+
+    }
+
+    @Override
+    void Defender() {
+
+    }
 }
