@@ -18,27 +18,27 @@ class Jogador {
 
         switch (tropaEscolhida) {
             case 1:
-                unidades.add(new Arqueira(10, 10, 30));
+                unidades.add(new Arqueira(75, 25));
                 numeroDeTropas++;
                 break;
             case 2:
-                unidades.add(new Cavaleiro(20, 50, 60));
+                unidades.add(new Cavaleiro(100, 20));
                 numeroDeTropas++;
                 break;
             case 3:
-                unidades.add(new Esqueletos(30, 60, 50));
+                unidades.add(new Esqueletos(10, 30));
                 numeroDeTropas++;
                 break;
             case 4:
-                unidades.add(new Cacador(40, 20, 40));
+                unidades.add(new Cacador(85, 35));
                 numeroDeTropas++;
                 break;
             case 5:
-                unidades.add(new Lancador(50, 30, 10));
+                unidades.add(new Lancador(110, 10));
                 numeroDeTropas++;
                 break;
             case 6:
-                unidades.add(new Mosqueteira(60, 70, 20));
+                unidades.add(new Mosqueteira(60, 30));
                 numeroDeTropas++;
                 break;
             default:

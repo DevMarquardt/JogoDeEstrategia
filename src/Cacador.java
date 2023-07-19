@@ -1,7 +1,7 @@
 class Cacador extends Unidade {
 
-    public Cacador(int vida, int ataque, int defesa) {
-        super(vida, ataque, defesa);
+    public Cacador(int vida, int ataque) {
+        super(vida, ataque);
     }
 
     @Override
@@ -9,13 +9,4 @@ class Cacador extends Unidade {
         return "Caçador";
     }
 
-    @Override
-    void Atacar() {
-
-    }
-
-    @Override
-    void Defender() {
-
-    }
 }

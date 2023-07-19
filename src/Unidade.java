@@ -2,14 +2,12 @@ abstract public class Unidade {
 
     private int vida;
     private int ataque;
-    private int defesa;
 
     Unidade unidade;
 
-    public Unidade(int vida, int ataque, int defesa) {
+    public Unidade(int vida, int ataque) {
         this.vida = vida;
         this.ataque = ataque;
-        this.defesa = defesa;
     }
 
     public int getVida() {
@@ -20,11 +18,18 @@ abstract public class Unidade {
         return ataque;
     }
 
-    public int getDefesa() {
-        return defesa;
+    public void setVida(int vida) {
+        this.vida = vida;
     }
 
-    abstract void Atacar();
-
-    abstract void Defender();
+    public void Atacar(Unidade tropa, Unidade unidadeInimiga, Jogador jogador1, Jogador jogador2, Jogador jogadorJogando, Jogador jogadorInimigo) {
+        int i = jogadorInimigo.getNumeroDeTropas();
+        int valorAtaque = tropa.getAtaque();
+        int valorVida = unidadeInimiga.getVida();
+        unidadeInimiga.setVida(valorVida - valorAtaque);
+        if (unidadeInimiga.getVida() <= 0) {
+            jogadorInimigo.getUnidades().remove(unidadeInimiga);
+            jogadorInimigo.setNumeroDeTropas(--i);
+        }
+    }
 }
