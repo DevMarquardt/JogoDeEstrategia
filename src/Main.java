@@ -16,8 +16,7 @@ public class Main {
         System.out.println("<============================>");
         System.out.println("         1 - Jogar          ");
         System.out.println("         2 - Sair           ");
-        System.out.println("<============================>");
-        System.out.println(">");
+        System.out.println("<============================>\n>");
         opcaoMenuInicial = sc.nextInt();
         switch (opcaoMenuInicial) {
             case 1:
@@ -36,7 +35,6 @@ public class Main {
         String jogador1Nome, jogador2Nome;
 
         do {
-            System.out.println("\n\n\n\n\n\n\n\n\n");
             System.out.println("<============================>");
             System.out.println("Qual o apelido do jogador 1?\n>");
             jogador1Nome = sc.next();
@@ -79,138 +77,216 @@ public class Main {
     }
 
     private static void menuSelecionarTropa(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando, Jogador jogadorInimigo) {
-        System.out.println("Tropas disponíveis:");
+        verificarFimDeJogo(jogador1, jogador2, jogadorJogando);
 
+        int opcaoTropa;
         ArrayList<Unidade> tropasDisponiveis = jogadorJogando.getUnidades();
 
-        for (int i = 0; i < tropasDisponiveis.size(); i++) {
-            Unidade tropa = tropasDisponiveis.get(i);
-            System.out.println((i) + " - " + tropa.toString());
-        }
-
-        System.out.println("Selecione o número correspondente à tropa desejada:");
-        int tropaSelecionada = sc.nextInt();
-        Unidade unidade = jogadorJogando.getUnidades().get(tropaSelecionada);
-
-        if (tropaSelecionada < 0 || tropaSelecionada > tropasDisponiveis.size()) {
-            System.out.println("Opção inválida, escolha novamente.");
-            menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
-            return;
-        }
-
-        Unidade tropa = tropasDisponiveis.get(tropaSelecionada);
-        int opcaoTropa;
-
-        System.out.println("Agora execute a ação da tropa:");
-        System.out.println("1 - Atacar");
-        System.out.println("2 - Analizar");
+        System.out.println("<============= " + jogadorJogando.getNome() + " =============>");
+        System.out.println("O que você deseja fazer?");
+        System.out.println("1 - Atacar tropa inimiga");
+        System.out.println("2 - Analisar tropa inimiga");
+        System.out.println("<=================================>\n>");
         opcaoTropa = sc.nextInt();
-        boolean telaOpcaoTropa = true;
-        System.out.println("Qual das tropas você deseja atacar?");
-        do {
-            switch (opcaoTropa) {
-                case 1:
-                    int i = 0;
-                    if (jogadorJogando == jogador1) {
-                        for (i = 0; i < jogador2.getNumeroDeTropas(); i++) {
-                            Unidade tropa2 = jogador2.getUnidades().get(i);
-                            System.out.println((i) + " - " + tropa2.toString());
-                        }
-                    }
 
-                    if (jogadorJogando == jogador2) {
-                        for (i = 0; i < jogador1.getNumeroDeTropas(); i++) {
-                            Unidade tropa1 = jogador1.getUnidades().get(i);
-                            System.out.println((i) + " - " + tropa1.toString());
-                        }
-                    }
-
-                    int opcao = sc.nextInt();
-                    Unidade unidadeInimiga = jogadorInimigo.getUnidades().get(opcao);
-                    unidade.Atacar(tropa, unidadeInimiga, jogador1, jogador2, jogadorJogando, jogadorInimigo);
-
-                    if (opcao < 0 || opcao > tropasDisponiveis.size()) {
-                        System.out.println("Opção inválida, escolha novamente.");
-                    }
-
-                    telaOpcaoTropa = false;
-                    break;
-                case 2:
-                    int opcaooo=0;
-                    int j;
-                    System.out.println("Qual das tropas você deseja analizar?");
-                    if (jogadorJogando == jogador1) {
-                        for (j = 0; j < jogador2.getNumeroDeTropas(); j++) {
-                            Unidade tropa2 = jogador2.getUnidades().get(j);
-                            System.out.println((j) + " - " + tropa2.toString());
-                        }
-                    }
-
-                    if (jogadorJogando == jogador2) {
-                        for (j = 0; j < jogador1.getNumeroDeTropas(); j++) {
-                            Unidade tropa1 = jogador1.getUnidades().get(j);
-                            System.out.println((j) + " - " + tropa1.toString());
-                        }
-                    }
-                    opcaooo = sc.nextInt();
-                    break;
-                default:
-                    System.out.println("Opção invalida");
-            }
-            }while (telaOpcaoTropa == true);
-        }
-
-    private static void desistir(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
-        System.out.println("Fim de jogo");
-        if (jogadorJogando.equals(jogador1)) {
-            System.out.println("O jogador " + jogador1.getNome() + " desistiu da partida, vitória para o jogador " + jogador2.getNome());
-            jogador2.incrementarVitorias();
-        } else if (jogadorJogando.equals(jogador2)) {
-            System.out.println("O jogador " + jogador2.getNome() + " desistiu da partida, vitória para o jogador " + jogador1.getNome());
-            jogador1.incrementarVitorias();
-        }
-        System.out.println("""
-                Deseja jogar novamente?
-                1 - Sim
-                2 - Não""");
-        int opcao=0;
-        opcao = sc.nextInt();
-
-        switch (opcao){
+        switch (opcaoTropa) {
             case 1:
-                menuTropas(jogador1, jogador2, jogadorJogando);
+                System.out.println("<=======================================================================>");
+                System.out.println("Selecione o número correspondente à tropa que deseja usar para atacar:");
+                for (int i = 0; i < tropasDisponiveis.size(); i++) {
+                    Unidade tropa = tropasDisponiveis.get(i);
+                    System.out.println((i) + " - " + tropa.toString());
+                }
+                System.out.println("<=======================================================================>");
+                System.out.println(">");
+                int tropaSelecionada = sc.nextInt();
+
+                if (tropaSelecionada < 0 || tropaSelecionada >= tropasDisponiveis.size()) {
+                    System.out.println("Opção inválida, escolha novamente.");
+                    menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
+                }
+
+                Unidade unidade = jogadorJogando.getUnidades().get(tropaSelecionada);
+
+                Unidade tropa = tropasDisponiveis.get(tropaSelecionada);
+                int i = 0;
+                System.out.println("<==========================================>");
+                System.out.println("Qual das tropas inimigas você deseja atacar?");
+                if (jogadorJogando == jogador1) {
+                    for (i = 0; i < jogador2.getNumeroDeTropas(); i++) {
+                        Unidade tropa2 = jogador2.getUnidades().get(i);
+                        System.out.println((i) + " - " + tropa2.toString());
+                    }
+                } else {
+                    for (i = 0; i < jogador1.getNumeroDeTropas(); i++) {
+                        Unidade tropa1 = jogador1.getUnidades().get(i);
+                        System.out.println((i) + " - " + tropa1.toString());
+                    }
+                }
+                System.out.println("<==========================================>\n>");
+
+                int opcao = sc.nextInt();
+                if (jogadorJogando == jogador1) {
+                    jogadorInimigo = jogador2;
+                } else {
+                    jogadorInimigo = jogador1;
+                }
+                if (opcao >= 0 && opcao < jogadorInimigo.getNumeroDeTropas()) {
+                    Unidade unidadeInimiga = jogadorInimigo.getUnidades().get(opcao);
+                    unidade.Atacar(tropa, unidadeInimiga, jogadorInimigo);
+
+                    if (unidadeInimiga.getVida() <= 0) {
+                        System.out.println("Tropa inimiga eliminada!");
+                    }
+                } else {
+                    System.out.println("Opção inválida, escolha novamente.");
+                    menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
+                }
+
                 break;
             case 2:
-                System.out.println("Finalizando");
-                System.exit(0);
-        }
-        jogador1.getUnidades().clear();
-        jogador2.getUnidades().clear();
-        jogador1.setNumeroDeTropas(0);
-        jogador2.setNumeroDeTropas(0);
+                System.out.println("<============================================>");
+                System.out.println("Qual das tropas inimigas você deseja analisar?");
+                if (jogadorJogando == jogador1) {
+                    for (i = 0; i < jogador2.getNumeroDeTropas(); i++) {
+                        Unidade tropa2 = jogador2.getUnidades().get(i);
+                        System.out.println((i) + " - " + tropa2.toString());
+                    }
+                } else {
+                    for (i = 0; i < jogador1.getNumeroDeTropas(); i++) {
+                        Unidade tropa1 = jogador1.getUnidades().get(i);
+                        System.out.println((i) + " - " + tropa1.toString());
+                    }
+                }
+                System.out.println("<============================================>\n>");
+                int opcao2 = sc.nextInt();
+                if (opcao2 >= 0 && opcao2 < tropasDisponiveis.size()) {
+                    Unidade unidadeInimiga2 = jogadorInimigo.getUnidades().get(opcao2);
+                    System.out.println("<==========================================>");
+                    System.out.println("Informações da tropa inimiga selecionada");
+                    System.out.println("💊: " + unidadeInimiga2.getVida());
+                    System.out.println("⚔️: " + unidadeInimiga2.getAtaque());
+                    System.out.println("🛡: " + unidadeInimiga2.getDefesa());
+                    System.out.println("<==========================================>\n");
+                    menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
+                } else {
+                    System.out.println("Opção inválida, escolha novamente.");
+                }
+                break;
 
-        menuTropas(jogador1, jogador2, jogadorJogando);
+            default:
+                System.out.println("Opção inválida, escolha novamente.");
+                menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
+                break;
+        }
+    }
+
+    private static void desistir(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+        System.out.println("<======================================>");
+        System.out.println("Fim de jogo");
+        Jogador vencedor;
+        if (jogadorJogando == jogador1) {
+            vencedor = jogador2;
+        } else {
+            vencedor = jogador1;
+        }
+        System.out.println("O jogador " + jogadorJogando.getNome() + " desistiu da partida, vitória para o jogador " + vencedor.getNome());
+        System.out.println("<======================================>\n");
+        vencedor.incrementarVitorias();
+
+        int opcao;
+        do {
+            System.out.println("<======================================>");
+            System.out.println("""
+                    Deseja jogar novamente?
+                    1 - Sim
+                    2 - Não""");
+            System.out.println("<======================================>\n>");
+            opcao = sc.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    jogador1.getUnidades().clear();
+                    jogador2.getUnidades().clear();
+                    jogador1.setNumeroDeTropas(0);
+                    jogador2.setNumeroDeTropas(0);
+                    menuTropas(jogador1, jogador2, jogadorJogando);
+                    break;
+                case 2:
+                    System.out.println("Finalizando");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opção inválida");
+                    break;
+            }
+        } while (opcao != 1);
+    }
+
+    private static void verificarFimDeJogo(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+        boolean acabou = false;
+
+        if (jogador1.getNumeroDeTropas() <= 0) {
+            acabou = true;
+            System.out.println("<==========================================>");
+            System.out.println("Fim de jogo! Vitória para o jogador " + jogador2.getNome());
+            jogador2.incrementarVitorias();
+            System.out.println("<==========================================>\n");
+        } else if (jogador2.getNumeroDeTropas() <= 0) {
+            acabou = true;
+            System.out.println("<==========================================>");
+            System.out.println("Fim de jogo! Vitória para o jogador " + jogador1.getNome());
+            jogador1.incrementarVitorias();
+            System.out.println("<==========================================>\n");
+        }
+
+        if (acabou) {
+            int opcao = 0;
+            do {
+                System.out.println("<====================================>");
+                System.out.println("""
+                        Deseja jogar novamente?
+                        1 - Sim
+                        2 - Não""");
+                System.out.println("<====================================>\n>");
+                opcao = sc.nextInt();
+
+                switch (opcao) {
+                    case 1:
+                        jogador1.getUnidades().clear();
+                        jogador2.getUnidades().clear();
+                        jogador1.setNumeroDeTropas(0);
+                        jogador2.setNumeroDeTropas(0);
+                        menuTropas(jogador1, jogador2, jogadorJogando);
+                        break;
+                    case 2:
+                        System.out.println("Finalizando");
+                        System.exit(0);
+                    default:
+                        System.out.println("Opção inválida");
+                        break;
+                }
+            } while (opcao != 1 && opcao != 2);
+        }
 
     }
 
-    public static void menuInGameJogador(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
-        boolean jogoRodando = true;
+    private static void menuInGameJogador(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
         boolean verJogador = true;
 
-        while (jogoRodando) {
+        while (true) {
             int opcaoMenuInGame = 0;
             Jogador jogadorInimigo;
             do {
+                verificarFimDeJogo(jogador1, jogador2, jogadorJogando);
                 if (verJogador) {
                     jogadorJogando = jogador1;
                     jogadorInimigo = jogador2;
-
                 } else {
                     jogadorJogando = jogador2;
                     jogadorInimigo = jogador1;
                 }
-                verJogador = !verJogador;
-                System.out.println("Turno do(a) " + jogadorJogando.getNome());
+                System.out.println("<============= Turno do(a) " + jogadorJogando.getNome() + " =============>");
                 System.out.println("Essas são suas tropas");
                 for (int i = 0; i < jogadorJogando.getNumeroDeTropas(); i++) {
                     Unidade tropa2 = jogadorJogando.getUnidades().get(i);
@@ -220,22 +296,19 @@ public class Main {
                 }
                 System.out.println("\nSelecione a opção desejada");
                 System.out.println("1 - Selecionar tropa");
-                System.out.println("2 - Aceitar a morte\n>");
+                System.out.println("2 - Aceitar a morte");
+                System.out.println("<=================================>\n>");
                 opcaoMenuInGame = sc.nextInt();
-                switch (opcaoMenuInGame) {
-                    case 1:
-                        menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
-                        break;
-                    case 2:
-                        desistir(jogador1, jogador2, jogadorJogando);
-                        break;
-                    default:
-                        System.out.println("Selecione uma opção válida");
-                        break;
+                if (opcaoMenuInGame == 1) {
+                    verJogador = !verJogador;
                 }
-            } while (opcaoMenuInGame < 1 || opcaoMenuInGame > 2);
+                switch (opcaoMenuInGame) {
+                    case 1 -> menuSelecionarTropa(jogador1, jogador2, jogadorJogando, jogadorInimigo);
+                    case 2 -> desistir(jogador1, jogador2, jogadorJogando);
+                    default -> System.out.println("Selecione uma opção válida");
+                }
 
+            } while (opcaoMenuInGame < 1 || opcaoMenuInGame > 2);
         }
     }
-
 }

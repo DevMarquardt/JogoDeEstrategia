@@ -1,7 +1,7 @@
 class Cavaleiro extends Unidade {
 
-    public Cavaleiro(int vida, int ataque) {
-        super(vida, ataque);
+    public Cavaleiro(int vida, int ataque, int defesa) {
+        super(vida, ataque, defesa);
     }
 
     @Override

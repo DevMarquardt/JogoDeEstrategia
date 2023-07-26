@@ -1,7 +1,7 @@
 class Lancador extends Unidade {
 
-    public Lancador(int vida, int ataque) {
-        super(vida, ataque);
+    public Lancador(int vida, int ataque, int defesa) {
+        super(vida, ataque, defesa);
     }
 
     @Override
