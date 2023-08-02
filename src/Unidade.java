@@ -1,4 +1,4 @@
-public class Unidade {
+public abstract class Unidade {
 
     private int vida;
     private int ataque;
@@ -26,9 +26,12 @@ public class Unidade {
         this.vida = vida;
     }
 
+    public abstract int bonusAtaque(Unidade unidadeInimiga);
+
     public void Atacar(Unidade tropa, Unidade unidadeInimiga,Jogador jogadorInimigo) {
         int i = jogadorInimigo.getNumeroDeTropas();
         int valorAtaque = tropa.getAtaque();
+        valorAtaque+=bonusAtaque(unidadeInimiga);
         int valorVida = unidadeInimiga.getVida();
         unidadeInimiga.setVida(valorVida - valorAtaque);
         if (unidadeInimiga.getVida() <= 0) {

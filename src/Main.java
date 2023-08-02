@@ -134,7 +134,6 @@ public class Main {
                 if (opcao >= 0 && opcao < jogadorInimigo.getNumeroDeTropas()) {
                     Unidade unidadeInimiga = jogadorInimigo.getUnidades().get(opcao);
                     unidade.Atacar(tropa, unidadeInimiga, jogadorInimigo);
-
                     if (unidadeInimiga.getVida() <= 0) {
                         System.out.println("Tropa inimiga eliminada!");
                     }
@@ -164,6 +163,7 @@ public class Main {
                     Unidade unidadeInimiga2 = jogadorInimigo.getUnidades().get(opcao2);
                     System.out.println("<==========================================>");
                     System.out.println("Informações da tropa inimiga selecionada");
+                    System.out.println("Tropa: " + unidadeInimiga2.toString());
                     System.out.println("💊: " + unidadeInimiga2.getVida());
                     System.out.println("⚔️: " + unidadeInimiga2.getAtaque());
                     System.out.println("🛡: " + unidadeInimiga2.getDefesa());
