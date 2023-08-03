@@ -7,11 +7,10 @@ public class Main {
     public static void main(String[] args) {
         Jogador jogador1 = new Jogador("", 0, 0);
         Jogador jogador2 = new Jogador("", 0, 0);
-        Jogador jogadorJogando = null;
-        menuInicial(jogador1, jogador2, jogadorJogando);
+        menuInicial(jogador1, jogador2);
     }
 
-    private static void menuInicial(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+    private static void menuInicial(Jogador jogador1, Jogador jogador2) {
         int opcaoMenuInicial;
         System.out.println("<============================>");
         System.out.println("         1 - Jogar          ");
@@ -20,18 +19,18 @@ public class Main {
         opcaoMenuInicial = sc.nextInt();
         switch (opcaoMenuInicial) {
             case 1:
-                menuJogo(jogador1, jogador2, jogadorJogando);
+                menuJogo(jogador1, jogador2);
                 break;
             case 2:
                 System.out.println("Finalizando");
                 System.exit(0);
             default:
                 System.out.println("Opção invalida");
-                menuInicial(jogador1, jogador2, jogadorJogando);
+                menuInicial(jogador1, jogador2);
         }
     }
 
-    private static void menuJogo(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+    private static void menuJogo(Jogador jogador1, Jogador jogador2) {
         String jogador1Nome, jogador2Nome;
 
         do {
@@ -44,14 +43,15 @@ public class Main {
             jogador2.setNome(jogador2Nome);
             System.out.println("<============================> ");
         } while (jogador1.getNome().equals("") || jogador2.getNome().equals(""));
-        menuTropas(jogador1, jogador2, jogadorJogando);
+        menuTropas(jogador1, jogador2);
     }
 
-    private static void menuTropas(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+    private static void menuTropas(Jogador jogador1, Jogador jogador2) {
         int tropaEscolhida;
 
         System.out.println("O jogador " + jogador1.getNome() + " possui " + jogador1.getVitorias() + " vitórias");
         System.out.println("O jogador " + jogador2.getNome() + " possui " + jogador2.getVitorias() + " vitórias");
+        Jogador jogadorJogando;
         do {
             if (jogador1.getNumeroDeTropas() <= 2) {
                 jogadorJogando = jogador1;
@@ -73,11 +73,11 @@ public class Main {
 
         } while (jogador1.getNumeroDeTropas() <= 2 || jogador2.getNumeroDeTropas() <= 2);
 
-        menuInGameJogador(jogador1, jogador2, jogadorJogando);
+        menuInGameJogador(jogador1, jogador2);
     }
 
     private static void menuSelecionarTropa(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando, Jogador jogadorInimigo) {
-        verificarFimDeJogo(jogador1, jogador2, jogadorJogando);
+        verificarFimDeJogo(jogador1, jogador2);
 
         int opcaoTropa;
         ArrayList<Unidade> tropasDisponiveis = jogadorJogando.getUnidades();
@@ -224,7 +224,7 @@ public class Main {
                     jogador2.getUnidades().clear();
                     jogador1.setNumeroDeTropas(0);
                     jogador2.setNumeroDeTropas(0);
-                    menuTropas(jogador1, jogador2, jogadorJogando);
+                    menuTropas(jogador1, jogador2);
                     break;
                 case 2:
                     System.out.println("Finalizando");
@@ -237,7 +237,7 @@ public class Main {
         } while (opcao != 1);
     }
 
-    private static void verificarFimDeJogo(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+    private static void verificarFimDeJogo(Jogador jogador1, Jogador jogador2) {
         boolean acabou = false;
 
         if (jogador1.getNumeroDeTropas() <= 0) {
@@ -271,7 +271,7 @@ public class Main {
                         jogador2.getUnidades().clear();
                         jogador1.setNumeroDeTropas(0);
                         jogador2.setNumeroDeTropas(0);
-                        menuTropas(jogador1, jogador2, jogadorJogando);
+                        menuTropas(jogador1, jogador2);
                         break;
                     case 2:
                         System.out.println("Finalizando");
@@ -285,14 +285,15 @@ public class Main {
 
     }
 
-    private static void menuInGameJogador(Jogador jogador1, Jogador jogador2, Jogador jogadorJogando) {
+    private static void menuInGameJogador(Jogador jogador1, Jogador jogador2) {
         boolean verJogador = true;
 
         while (true) {
             int opcaoMenuInGame = 0;
             Jogador jogadorInimigo;
             do {
-                verificarFimDeJogo(jogador1, jogador2, jogadorJogando);
+                verificarFimDeJogo(jogador1, jogador2);
+                Jogador jogadorJogando;
                 if (verJogador) {
                     jogadorJogando = jogador1;
                     jogadorInimigo = jogador2;
