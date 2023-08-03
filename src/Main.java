@@ -123,6 +123,7 @@ public class Main {
                         System.out.println((i) + " - " + tropa1.toString());
                     }
                 }
+
                 System.out.println("<==========================================>\n>");
 
                 int opcao = sc.nextInt();
@@ -133,6 +134,19 @@ public class Main {
                 }
                 if (opcao >= 0 && opcao < jogadorInimigo.getNumeroDeTropas()) {
                     Unidade unidadeInimiga = jogadorInimigo.getUnidades().get(opcao);
+                    if (unidade instanceof Arqueira && unidadeInimiga instanceof Cavaleiro) {
+                        System.out.println("BONUS DE ATAQUE");
+                    } else if (unidade instanceof Cacador && unidadeInimiga instanceof Esqueletos) {
+                        System.out.println("BONUS DE ATAQUE");
+                    } else if (unidade instanceof Cavaleiro && unidadeInimiga instanceof Arqueira) {
+                        System.out.println("BONUS DE ATAQUE");
+                    } else if (unidade instanceof Esqueletos && unidadeInimiga instanceof Mosqueteira) {
+                        System.out.println("BONUS DE ATAQUE");
+                    } else if (unidade instanceof Lancador && unidadeInimiga instanceof Cacador) {
+                        System.out.println("BONUS DE ATAQUE");
+                    } else if (unidade instanceof Mosqueteira && unidadeInimiga instanceof Lancador) {
+                        System.out.println("BONUS DE ATAQUE");
+                    }
                     unidade.Atacar(tropa, unidadeInimiga, jogadorInimigo);
                     if (unidadeInimiga.getVida() <= 0) {
                         System.out.println("Tropa inimiga eliminada!");
