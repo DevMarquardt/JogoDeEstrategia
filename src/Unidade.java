@@ -28,15 +28,14 @@ public abstract class Unidade {
 
     public abstract int bonusAtaque(Unidade unidadeInimiga);
 
-    public void Atacar(Unidade tropa, Unidade unidadeInimiga,Jogador jogadorInimigo) {
+    public void atacar(Unidade unidadeInimiga, Jogador jogadorInimigo) {
         int i = jogadorInimigo.getNumeroDeTropas();
-        int valorAtaque = tropa.getAtaque();
+        int valorAtaque = this.getAtaque();
         valorAtaque+=bonusAtaque(unidadeInimiga);
         int valorVida = unidadeInimiga.getVida();
         unidadeInimiga.setVida(valorVida - valorAtaque);
         if (unidadeInimiga.getVida() <= 0) {
             jogadorInimigo.getUnidades().remove(unidadeInimiga);
-            jogadorInimigo.setNumeroDeTropas(i - 1);
         }
     }
 }

@@ -1,7 +1,7 @@
 class Arqueira extends Unidade {
 
-    public Arqueira(int vida, int ataque, int defesa) {
-        super(vida, ataque, defesa);
+    public Arqueira() {
+        super(59, 19, 25);
     }
 
     @Override

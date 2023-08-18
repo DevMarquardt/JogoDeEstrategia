@@ -1,7 +1,7 @@
 class Mosqueteira extends Unidade {
 
-    public Mosqueteira(int vida, int ataque, int defesa) {
-        super(vida, ataque, defesa);
+    public Mosqueteira() {
+        super(78, 24, 15);
     }
 
     @Override

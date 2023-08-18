@@ -1,7 +1,7 @@
 class Esqueletos extends Unidade {
 
-    public Esqueletos(int vida, int ataque, int defesa) {
-        super(vida, ataque, defesa);
+    public Esqueletos() {
+        super(46, 11, 30);
     }
 
     @Override
